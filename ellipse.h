@@ -1,5 +1,5 @@
-#ifndef ELLIPS_H
-#define ELLIPS_H
+#ifndef ellipse_H
+#define ellipse_H
 #include <QObject>
 #include <QGraphicsItem>
 #include <QPainter>
@@ -7,14 +7,13 @@
 #include <QDebug>
 #include <QCursor>
 #include <QCoreApplication>
-
-class ellips : public QObject, public QGraphicsItem
+class ellipse : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    explicit ellips(QObject *parent = 0);
-    ~ellips();
-
+    explicit ellipse();
+    ~ellipse();
+    int w,h,R,G,B,size;
 signals:
 
 private:
@@ -27,4 +26,4 @@ private:
 public slots:
 };
 
-#endif // ellips_H
+#endif // ellipse_H

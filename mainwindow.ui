@@ -222,17 +222,10 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="8">
-      <widget class="QLineEdit" name="pen_color_B">
+     <item row="0" column="7">
+      <widget class="QLabel" name="label_13">
        <property name="text">
-        <string>67</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="5">
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>G</string>
+        <string>B</string>
        </property>
        <property name="textFormat">
         <enum>Qt::AutoText</enum>
@@ -255,24 +248,16 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="6">
-      <widget class="QLineEdit" name="pen_color_G">
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_10">
        <property name="text">
-        <string>174</string>
+        <string>Pen color:</string>
        </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="pen_size">
-       <property name="text">
-        <string>3</string>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
        </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QLineEdit" name="pen_color_R">
-       <property name="text">
-        <string>12</string>
+       <property name="indent">
+        <number>-3</number>
        </property>
       </widget>
      </item>
@@ -289,10 +274,10 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_10">
+     <item row="0" column="5">
+      <widget class="QLabel" name="label_12">
        <property name="text">
-        <string>Pen color:</string>
+        <string>G</string>
        </property>
        <property name="textFormat">
         <enum>Qt::AutoText</enum>
@@ -302,16 +287,31 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="7">
-      <widget class="QLabel" name="label_13">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="pen_size">
        <property name="text">
-        <string>B</string>
+        <string>3</string>
        </property>
-       <property name="textFormat">
-        <enum>Qt::AutoText</enum>
+      </widget>
+     </item>
+     <item row="0" column="8">
+      <widget class="QLineEdit" name="pen_color_B">
+       <property name="text">
+        <string>67</string>
        </property>
-       <property name="indent">
-        <number>-3</number>
+      </widget>
+     </item>
+     <item row="0" column="6">
+      <widget class="QLineEdit" name="pen_color_G">
+       <property name="text">
+        <string>174</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QLineEdit" name="pen_color_R">
+       <property name="text">
+        <string>12</string>
        </property>
       </widget>
      </item>
@@ -395,6 +395,25 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="indent">
      <number>-3</number>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>730</width>
+      <height>730</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
     </property>
    </widget>
   </widget>

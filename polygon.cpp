@@ -1,6 +1,7 @@
 #include "polygon.h"
 
-polygon::polygon()
+polygon::polygon(QObject *parent) :
+    QObject(parent), QGraphicsItem()
 {
 
 }
