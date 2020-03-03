@@ -19,12 +19,14 @@ SOURCES += \
     ellipse.cpp \
     main.cpp \
     mainwindow.cpp \
+    polygon.cpp \
     rectangle.cpp
 
 HEADERS += \
     ellipse.h \
     globalvar.h \
     mainwindow.h \
+    polygon.h \
     rectangle.h
 
 FORMS += \

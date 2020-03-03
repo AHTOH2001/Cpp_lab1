@@ -34,13 +34,7 @@ private:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
-    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
-    //void myrotation (double ang,double delta);
     double ang = 0,now_ang = 0,size = 1,now_size = 1;
-   // int p = 0;
-    //QTimer *timer;
-    //void keyReleaseEvent(QKeyEvent *event);
-    //void keyPressEvent(QKeyEvent *event);
 
 public slots:
 };

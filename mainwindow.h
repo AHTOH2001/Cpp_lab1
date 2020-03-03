@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QtGui>
 #include <QtCore>
-#include <ellips.h>
 #include <polygon.h>
 #include <rectangle.h>
 #include <ellipse.h>
@@ -30,16 +29,20 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+    struct triple
+    {
+        int first,second;
+        double third;
+    };
 
-   // void keyPressEvent(QKeyEvent *event);
 protected:
     void paintEvent(QPaintEvent *event);
 private slots:
-
-    void on_pushButton_rect_2_clicked();
     void on_pushButton_elips_clicked();
     void on_pushButton_polygon_clicked();
     void on_rotate_angle_editingFinished();
     void on_size_editingFinished();
+    void on_pushButton_rect_clicked();
+    triple CalcCenter (QStringList);
 };
 #endif // MAINWINDOW_H
