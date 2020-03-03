@@ -1,11 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QObject>
-#include <QGraphicsItem>
-#include <QPainter>
-#include <QGraphicsSceneMouseEvent>
-#include <QDebug>
-#include <QCursor>
+int p = 0;
+per global_per;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -25,7 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     //ui->graphicsView->setFocus(Qt::TabFocusReason);
     //qDebug() << "fg" << ui->graphicsView->hasFocus();
     scene->setSceneRect(0,0,700,700);
-
+    global_per.angle = ui->rotate_angle->text().toDouble();
+    global_per.Size = ui->size->text().toDouble()/100;
    // rectangle *item = new rectangle(300,200);
     //ellipse *item = new ellipse();
     /*item->setPos(350,720);
@@ -35,7 +32,6 @@ MainWindow::MainWindow(QWidget *parent)
     item->setPos(100,100);
     scene->addItem(item);*/
 }
-int p = 0;
 void MainWindow::paintEvent(QPaintEvent *event)
 {
 
@@ -50,7 +46,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
         item->R = ui->pen_color_R->text().toInt();
         item->G = ui->pen_color_G->text().toInt();
         item->B = ui->pen_color_B->text().toInt();
-        item->size = ui->pen_size->text().toInt();
+        item->PenSize = ui->pen_size->text().toInt();
         item->setFlag(QGraphicsItem::ItemIsFocusable, true);
         //item->setFocus();
         //qDebug() << "item " << item->hasFocus();
@@ -101,6 +97,8 @@ void MainWindow::paintEvent(QPaintEvent *event)
         }
     }
 
+    Q_UNUSED(event);
+
 }
 
 /*void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -131,3 +129,14 @@ void MainWindow::on_pushButton_polygon_clicked()
 }
 
 
+
+void MainWindow::on_rotate_angle_editingFinished()
+{
+    //per p;
+    global_per.angle = ui->rotate_angle->text().toDouble();
+}
+
+void MainWindow::on_size_editingFinished()
+{
+    global_per.Size = ui->size->text().toDouble()/100;
+}

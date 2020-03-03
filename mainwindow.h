@@ -8,6 +8,13 @@
 #include <polygon.h>
 #include <rectangle.h>
 #include <ellipse.h>
+#include <globalvar.h>
+#include <QObject>
+#include <QGraphicsItem>
+#include <QPainter>
+#include <QGraphicsSceneMouseEvent>
+#include <QDebug>
+#include <QCursor>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -32,5 +39,7 @@ private slots:
     void on_pushButton_rect_2_clicked();
     void on_pushButton_elips_clicked();
     void on_pushButton_polygon_clicked();
+    void on_rotate_angle_editingFinished();
+    void on_size_editingFinished();
 };
 #endif // MAINWINDOW_H

@@ -23,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     ellipse.h \
+    globalvar.h \
     mainwindow.h \
     rectangle.h
 
