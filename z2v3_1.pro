@@ -19,12 +19,14 @@ SOURCES += \
     ellipse.cpp \
     main.cpp \
     mainwindow.cpp \
+    mypaint.cpp \
     polygon.cpp \
     rectangle.cpp
 
 HEADERS += \
     ellipse.h \
     mainwindow.h \
+    mypaint.h \
     polygon.h \
     rectangle.h
 

@@ -10,19 +10,7 @@ polygon::~polygon()
 }
 void polygon::init()
 {
-    QPair <int,int> cord;
-    foreach (cord,cords)
-    {
-        minX = qMin(cord.first,minX);
-        minY = qMin(cord.second,minY);
-        maxX = qMax(cord.first,maxX);
-        maxY = qMax(cord.second,maxY);
-    }
-    w = qMax(maxX-Center.first,Center.first - minX)*2;
-    h = qMax(maxY-Center.second,Center.second - minY)*2;
     now_area = area;
-    for (int i = 0;i<cords.length()-1;i++)
-        perimeter += pow(pow(cords[i].first-cords[i+1].first,2.)+pow(cords[i].second-cords[i+1].second,2.),1/2.);
     now_perimeter = perimeter;
 }
 
@@ -32,19 +20,13 @@ QRectF polygon::boundingRect() const
 }
 void polygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    if (this->hasFocus())
-        painter-> setPen(QPen(Qt::red,3));
-    else
-        painter-> setPen(QPen(QColor(20,20,20),3));
-    painter->drawPoint(0,0);
-    painter->setPen(QPen(QColor(R,G,B),PenSize));
-    QPair<int,int> cord;
-    QPolygon poly;
-    foreach (cord,cords)
-    {
-        poly << QPoint(cord.first-Center.first,cord.second-Center.second);
-    }
-    painter->drawPolygon(poly);
+     if (this->hasFocus())
+         painter-> setPen(QPen(Qt::red,3));
+     else
+         painter-> setPen(QPen(QColor(20,20,20),3));
+        painter->drawPoint(0,0);
+        painter->setPen(QPen(QColor(R,G,B),PenSize));
+        painter->drawPolygon(poly);
         QThread::msleep(10);
         double delta = ang-now_ang;
         if (delta<0.5 && delta>-0.5) now_ang=ang;

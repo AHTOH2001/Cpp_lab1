@@ -10,9 +10,10 @@ ellipse::~ellipse()
 }
 void ellipse::init()
 {
-    area = M_PI*w*h;
+    area = M_PI*w*h/4;
     now_area = area;
-    perimeter = 4*(M_PI*w*h+w-h)/(w+h);
+    perimeter = 2*M_PI*sqrt(pow(w/2,2)+pow(h/2,2)/2);
+    perimeter = 4*(M_PI*w*h/4+(w-h)/2)/(w+h)/2;
     now_perimeter = perimeter;
 }
 
@@ -29,7 +30,6 @@ void ellipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
         painter->drawPoint(0,0);
         painter->setPen(QPen(QColor(R,G,B),PenSize));
         painter->drawEllipse(-w/2,-h/2,w,h);
-        qDebug() << w  << " " << h;
         QThread::msleep(10);
         double delta = ang-now_ang;
         if (delta<0.5 && delta>-0.5) now_ang=ang;

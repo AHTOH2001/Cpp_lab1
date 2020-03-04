@@ -11,7 +11,6 @@
 #include <QKeyEvent>
 #include <QWidget>
 #include <QtGui>
-#include <globalvar.h>
 #include <QTimer>
 #include <qglobal.h>
 #include <QApplication>

@@ -7,7 +7,7 @@
 #include <polygon.h>
 #include <rectangle.h>
 #include <ellipse.h>
-#include <globalvar.h>
+#include <mypaint.h>
 #include <QObject>
 #include <QGraphicsItem>
 #include <QPainter>
@@ -34,14 +34,22 @@ private:
         int first,second;
         double third;
     };
+    int p = 0;
+    bool Fpaint = false;
+    mypaint *paint_scene;
+   /* void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);*/
 
 protected:
-    void paintEvent(QPaintEvent *event);
+
 private slots:
     void on_pushButton_elips_clicked();
     void on_pushButton_polygon_clicked();
     void on_pushButton_rect_clicked();
     triple CalcCenter (QStringList);
     void on_Tgravity_clicked();
+    void on_Reset_scene_clicked();
+    void on_paint_figure_clicked();
 };
 #endif // MAINWINDOW_H
