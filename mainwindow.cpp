@@ -15,6 +15,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    ui->Reset_scene->setStyleSheet(
+                "QPushButton{"
+                "background-color: rgb(235, 23, 23);"
+                "border-radius: 4px transparent;"
+                "border-bottom: 3px transparent;"
+                "border-right: 2px transparent;"
+                "border-left: 2px transparent;}"
+                "QPushButton:pressed  {"
+                "background-color: rgb(232,95,76); } "
+                );
     scene->setSceneRect(0,0,700,700);
 }
 
@@ -25,6 +35,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
         int x = ui->rect_x->text().toInt();
         int y = ui->rect_y->text().toInt();
         rectangle *item = new rectangle();
+        item->setFlag(QGraphicsItem::ItemIsFocusable, true);
         item->setPos(x,y);
         item->w = ui->rect_w->text().toInt();
         item->h = ui->rect_h->text().toInt();
@@ -32,7 +43,17 @@ void MainWindow::paintEvent(QPaintEvent *event)
         item->G = ui->pen_color_G->text().toInt();
         item->B = ui->pen_color_B->text().toInt();
         item->PenSize = ui->pen_size->text().toInt();
-        item->setFlag(QGraphicsItem::ItemIsFocusable, true);
+        item->out_area = ui->area;
+        item->out_perimeter = ui->perimeter;
+        item->out_centerX = ui->center_x;
+        item->out_centerY = ui->center_y;
+        item->out_angle = ui->angle;
+        item->Tgravity =ui->Tgravity;
+        item->centergravity_x = ui->centergravity_x;
+        item->centergravity_y = ui->centergravity_y;
+        item -> rotate_angle = ui->rotate_angle;
+        item -> change_size = ui->size;
+        item->rectangle::init();
         scene->addItem(item);
         p = 0;
     }
@@ -42,13 +63,25 @@ void MainWindow::paintEvent(QPaintEvent *event)
         int x = ui->elips_x->text().toInt();
         int y = ui->elips_y->text().toInt();
         ellipse *item = new ellipse();
+        item->setFlag(QGraphicsItem::ItemIsFocusable, true);
         item->setPos(x,y);
-        item->w = ui->rect_w->text().toInt();
-        item->h = ui->rect_h->text().toInt();
+        item->w = ui->elips_w->text().toInt();
+        item->h = ui->elips_h->text().toInt();
         item->R = ui->pen_color_R->text().toInt();
         item->G = ui->pen_color_G->text().toInt();
         item->B = ui->pen_color_B->text().toInt();
-        item->size = ui->pen_size->text().toInt();
+        item->PenSize = ui->pen_size->text().toInt();
+        item->out_area = ui->area;
+        item->out_perimeter = ui->perimeter;
+        item->out_centerX = ui->center_x;
+        item->out_centerY = ui->center_y;
+        item->out_angle = ui->angle;
+        item->Tgravity =ui->Tgravity;
+        item->centergravity_x = ui->centergravity_x;
+        item->centergravity_y = ui->centergravity_y;
+        item -> rotate_angle = ui->rotate_angle;
+        item -> change_size = ui->size;
+        item->ellipse::init();
         scene->addItem(item);
         p = 0;
     }
@@ -61,13 +94,13 @@ void MainWindow::paintEvent(QPaintEvent *event)
         while (str[str.length()-1].toInt()==0) str.pop_back();
         for (int i = 0;i<str.length();i+=2)
         {
-            item->R = ui->pen_color_R->text().toInt();
-            item->G = ui->pen_color_G->text().toInt();
-            item->B = ui->pen_color_B->text().toInt();
-            item->PenSize = ui->pen_size->text().toInt();
             item->cords.push_back( {str[i].toInt(),str[i+1].toInt()});
         }
         triple center = CalcCenter(str);
+        item->R = ui->pen_color_R->text().toInt();
+        item->G = ui->pen_color_G->text().toInt();
+        item->B = ui->pen_color_B->text().toInt();
+        item->PenSize = ui->pen_size->text().toInt();
         item->Center.first = center.first;
         item->Center.second = center.second;
         item->setPos(center.first,center.second);

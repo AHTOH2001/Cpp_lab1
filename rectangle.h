@@ -16,13 +16,22 @@
 #include <qglobal.h>
 #include <QApplication>
 #include <QKeyEvent>
+#include <QVector>
+#include <QtGlobal>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
 class rectangle : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
     explicit rectangle();
     ~rectangle();
-    int w,h,R,G,B,PenSize;
+    void init();
+    int R,G,B,PenSize,w,h;
+    QLabel *out_area,*out_perimeter,*out_angle,*out_centerX,*out_centerY;
+    QPushButton *Tgravity;
+    QLineEdit *centergravity_x,*centergravity_y,*rotate_angle,*change_size;
 
 
 signals:
@@ -34,8 +43,8 @@ private:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
-    double ang = 0,now_ang = 0,size = 1,now_size = 1;
-
+    void Output();
+    double ang = 0,now_ang = 0,size = 1,now_size = 1,perimeter = 0,now_perimeter = 0,area = 0,now_area = 0;
 public slots:
 };
 
