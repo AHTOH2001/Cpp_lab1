@@ -13,20 +13,22 @@ class mypaint : public QGraphicsView
 public:
      explicit mypaint(QWidget *parent = 0);
     ~mypaint();
-    void init();
-    int R,G,B,PenSize;
+    void draw();
+    QLineEdit *R,*G,*B,*PenSize;
     QLabel *out_area,*out_perimeter,*out_angle,*out_centerX,*out_centerY;
     QPushButton *Tgravity;
     QLineEdit *centergravity_x,*centergravity_y,*rotate_angle,*change_size;
+    QGraphicsScene *main_scene;
     void mouseMoveEvent(QMouseEvent *event);
-   // void mousePressEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
    // void mouseReleaseEvent(QMouseEvent *event);
 
 signals:
 
 private:
     QGraphicsScene      *scene;
-    QPolygon poly;
+    QVector<QPair<int,int>> cords;
+
 
 public slots:
 };

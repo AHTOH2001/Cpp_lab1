@@ -27,10 +27,10 @@ public:
     explicit polygon();
     ~polygon();
     void init();
-    int R,G,B,PenSize,w = 0,h = 0;
-    QPolygon poly;
-    //QVector<QPair<int,int>> cords;
-    QPair<int,int> Center;
+    int R,G,B,PenSize;
+
+    QVector<QPair<int,int>> cords;
+    QPair<int,int> Center = {0,0};
     double area;
     QLabel *out_area,*out_perimeter,*out_angle,*out_centerX,*out_centerY;
     QPushButton *Tgravity;
@@ -48,6 +48,8 @@ private:
     void keyPressEvent(QKeyEvent *event);
     void Output();
     double ang = 0,now_ang = 0,size = 1,now_size = 1,perimeter = 0,now_perimeter = 0,now_area = 0;
+    int maxX = 0,maxY = 0,minX = 2000000000,minY = 2000000000,w = 0,h = 0;
+    QPolygon poly;
 public slots:
 };
 

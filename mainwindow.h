@@ -29,17 +29,8 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-    struct triple
-    {
-        int first,second;
-        double third;
-    };
     int p = 0;
-    bool Fpaint = false;
     mypaint *paint_scene;
-   /* void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);*/
 
 protected:
 
@@ -47,9 +38,9 @@ private slots:
     void on_pushButton_elips_clicked();
     void on_pushButton_polygon_clicked();
     void on_pushButton_rect_clicked();
-    triple CalcCenter (QStringList);
     void on_Tgravity_clicked();
     void on_Reset_scene_clicked();
     void on_paint_figure_clicked();
+    void on_undo_clicked();
 };
 #endif // MAINWINDOW_H

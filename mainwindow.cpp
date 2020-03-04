@@ -5,8 +5,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->resize(1200,730);
-    this->setFixedSize(1200,730);
+    this->resize(1200,756);
+    this->setFixedSize(1200,756);
     scene = new QGraphicsScene(this);
     ui->graphicsView->resize(730,730);
     ui->graphicsView->setScene(scene);
@@ -23,12 +23,25 @@ MainWindow::MainWindow(QWidget *parent)
                 "QPushButton:pressed  {"
                 "background-color: rgb(255,0,0); } "
                 );
-    scene->setSceneRect(0,0,700,700);
+    scene->setSceneRect(0,0,720,720);
 
     paint_scene = new mypaint();
+    paint_scene->R = ui->pen_color_R;
+    paint_scene->G = ui->pen_color_G;
+    paint_scene->B = ui->pen_color_B;
+    paint_scene->PenSize = ui->pen_size;
     ui->graphicLayout->addWidget(paint_scene);
-    paint_scene->init();
-
+    paint_scene->out_area = ui->area;
+    paint_scene->out_perimeter = ui->perimeter;
+    paint_scene->out_centerX = ui->center_x;
+    paint_scene->out_centerY = ui->center_y;
+    paint_scene->out_angle = ui->angle;
+    paint_scene->Tgravity =ui->Tgravity;
+    paint_scene->centergravity_x = ui->centergravity_x;
+    paint_scene->centergravity_y = ui->centergravity_y;
+    paint_scene -> rotate_angle = ui->rotate_angle;
+    paint_scene -> change_size = ui->size;
+    paint_scene ->main_scene = scene;
     //paint_scene -> mypaint::init();
     //paint_scene->gr = ui->graphicsView_2;
 }
@@ -36,35 +49,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-MainWindow::triple MainWindow::CalcCenter (QStringList str)
-{
-    int prX,prY,nxX,nxY,area = 0;
-    triple ans = {0,0,0};
-    for(int i = 0; i < str.length()-1; i+=2)
-    {
-        prX = str[i].toInt();
-        prY = str[i+1].toInt();
-        if (i==str.length()-2)
-        {
-        nxX = str[0].toInt();
-        nxY = str[1].toInt();
-        }
-        else
-        {
-        nxX = str[i+2].toInt();
-        nxY = str[i+3].toInt();
-        }
-        int x = prX * nxY - nxX * prY;
-        area += x;
-        ans.first += (prX + nxX) * x;
-        ans.second += (prY + nxY) * x;
-    }
-    ans.first /= area*3;
-    ans.second /= area*3;
-    ans.third = abs(area/2);
-    return ans;
 }
 
 void MainWindow::on_pushButton_rect_clicked()
@@ -124,33 +108,19 @@ void MainWindow::on_pushButton_elips_clicked()
 void MainWindow::on_pushButton_polygon_clicked()
 {
     polygon *item = new polygon();
-    QPolygon poly;
     item->setFlag(QGraphicsItem::ItemIsFocusable, true);
     QStringList str = ui->polygon_xy->toPlainText().split(" ");
-    triple center = CalcCenter(str);
-    int maxX = 0,maxY = 0,minX = 2000000000,minY = 2000000000;
-    double perimeter = 0;
     while (str[str.length()-1].toInt()==0) str.pop_back();
     for (int i = 0;i<str.length();i+=2)
     {
-        poly << QPoint (str[i].toInt()-center.first,str[i+1].toInt()-center.second);
-        minX = qMin(str[i].toInt(),minX);
-        minY = qMin(str[i+1].toInt(),minY);
-        maxX = qMax(str[i].toInt(),maxX);
-        maxY = qMax(str[i+1].toInt(),maxY);
-        perimeter += pow(pow(str[i].toInt()-str[(i+2)%str.length()].toInt(),2.)+pow(str[i+1].toInt()-str[(i+3)%str.length()].toInt(),2.),1/2.);
+        item->cords.push_back( {str[i].toInt(),str[i+1].toInt()});
     }
-    item -> poly = poly;
-    item->w = qMax(maxX-center.first,center.first - minX)*2;
-    item->h = qMax(maxY-center.second,center.second - minY)*2;
+    item->init();
     item->R = ui->pen_color_R->text().toInt();
     item->G = ui->pen_color_G->text().toInt();
     item->B = ui->pen_color_B->text().toInt();
     item->PenSize = ui->pen_size->text().toInt();
-    item->Center.first = center.first;
-    item->Center.second = center.second;
-    item->setPos(center.first,center.second);
-    item->area = center.third;
+    item->setPos(item->Center.first,item->Center.second);
     item->out_area = ui->area;
     item->out_perimeter = ui->perimeter;
     item->out_centerX = ui->center_x;
@@ -161,11 +131,9 @@ void MainWindow::on_pushButton_polygon_clicked()
     item->centergravity_y = ui->centergravity_y;
     item -> rotate_angle = ui->rotate_angle;
     item -> change_size = ui->size;
-    item->init();
     scene->addItem(item);
     str.clear();
 }
-
 
 void MainWindow::on_Tgravity_clicked()
 {
@@ -180,32 +148,10 @@ void MainWindow::on_Reset_scene_clicked()
 
 void MainWindow::on_paint_figure_clicked()
 {
-    if (Fpaint==false)
-    {
-        Fpaint = true;
-        ui->paint_figure->setText("Turn OFF Paint tool");
-    }
-    else
-    {
-        Fpaint = false;
-        ui->paint_figure->setText("Turn ON Paint tool");
-    }
+    paint_scene->draw();
 }
 
-/*void MainWindow::mouseMoveEvent(QMouseEvent *event)
+void MainWindow::on_undo_clicked()
 {
-    qDebug() << "Move";
-    //scene->setPos(mapToScene(event->pos()));
-}
 
-void MainWindow::mousePressEvent(QMouseEvent *event)
-{
-    //this->setCursor(QCursor(Qt::ClosedHandCursor));
-    Q_UNUSED(event);
 }
-
-void MainWindow::mouseReleaseEvent(QMouseEvent *event)
-{
-//    this->setCursor(QCursor(Qt::ArrowCursor));
-    Q_UNUSED(event);
-}*/

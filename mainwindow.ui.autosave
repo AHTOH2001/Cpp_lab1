@@ -1100,7 +1100,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="paint_figure_2">
+      <widget class="QPushButton" name="undo">
        <property name="minimumSize">
         <size>
          <width>100</width>
