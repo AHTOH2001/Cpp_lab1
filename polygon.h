@@ -19,6 +19,8 @@
 #include <QVector>
 #include <QtGlobal>
 #include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
 class polygon : public QObject, public QGraphicsItem
 {
     Q_OBJECT
@@ -30,7 +32,9 @@ public:
     QVector<QPair<int,int>> cords;
     QPair<int,int> Center;
     double area;
-    QLabel *out_area,*out_perimeter,*out_centerX,*out_centerY,*out_angle;
+    QLabel *out_area,*out_perimeter,*out_angle,*out_centerX,*out_centerY;
+    QPushButton *Tgravity;
+    QLineEdit *centergravity_x,*centergravity_y,*rotate_angle,*change_size;
 
 
 signals:

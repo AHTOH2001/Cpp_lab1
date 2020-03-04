@@ -40,9 +40,8 @@ protected:
 private slots:
     void on_pushButton_elips_clicked();
     void on_pushButton_polygon_clicked();
-    void on_rotate_angle_editingFinished();
-    void on_size_editingFinished();
     void on_pushButton_rect_clicked();
     triple CalcCenter (QStringList);
+    void on_Tgravity_clicked();
 };
 #endif // MAINWINDOW_H

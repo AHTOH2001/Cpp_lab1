@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 int p = 0;
-per global_per;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,8 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     scene->setSceneRect(0,0,700,700);
-    global_per.angle = ui->rotate_angle->text().toDouble();
-    global_per.Size = ui->size->text().toDouble()/100;
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)
@@ -80,6 +77,11 @@ void MainWindow::paintEvent(QPaintEvent *event)
         item->out_centerX = ui->center_x;
         item->out_centerY = ui->center_y;
         item->out_angle = ui->angle;
+        item->Tgravity =ui->Tgravity;
+        item->centergravity_x = ui->centergravity_x;
+        item->centergravity_y = ui->centergravity_y;
+        item -> rotate_angle = ui->rotate_angle;
+        item -> change_size = ui->size;
         item->polygon::init();
         scene->addItem(item);
         str.clear();
@@ -140,15 +142,7 @@ void MainWindow::on_pushButton_polygon_clicked()
 }
 
 
-
-void MainWindow::on_rotate_angle_editingFinished()
+void MainWindow::on_Tgravity_clicked()
 {
-    global_per.angle = ui->rotate_angle->text().toDouble();
+   ui->Tgravity->setText("Choose object to move");
 }
-
-void MainWindow::on_size_editingFinished()
-{
-    global_per.Size = ui->size->text().toDouble()/100;
-}
-
-

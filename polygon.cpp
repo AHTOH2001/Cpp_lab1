@@ -1,5 +1,4 @@
 #include "polygon.h"
-extern per global_per;
 polygon::polygon() :
     QObject(0), QGraphicsItem()
 {
@@ -33,7 +32,8 @@ QRectF polygon::boundingRect() const
 }
 void polygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    if (this->hasFocus()) painter-> setPen(QPen(Qt::red,3));
+    if (this->hasFocus())
+        painter-> setPen(QPen(Qt::red,3));
     else
         painter-> setPen(QPen(QColor(20,20,20),3));
     painter->drawPoint(0,0);
@@ -87,11 +87,18 @@ out_angle->setText(QString::number(now_ang));
 void polygon::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     this->setPos(mapToScene(event->pos()));
-
 }
 
 void polygon::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    if (Tgravity->text()=="Choose object to move")
+    {
+        Tgravity->setText("Set center of gravity:");
+        this -> setPos(centergravity_x->text().toInt(),centergravity_y->text().toInt());
+        this-> clearFocus();
+        this-> ungrabMouse();
+    }
+    else
     this->setCursor(QCursor(Qt::ClosedHandCursor));
     Q_UNUSED(event);
 }
@@ -106,19 +113,19 @@ void polygon::keyPressEvent(QKeyEvent *event)
 {
 
 
-    if (event->key()==Qt::Key_Left) ang += global_per.angle;
+    if (event->key()==Qt::Key_Left) ang += rotate_angle->text().toInt();
     else
-    if (event->key()==Qt::Key_Right) ang -= global_per.angle;
+    if (event->key()==Qt::Key_Right) ang -= rotate_angle->text().toInt();
     else
     if (event->key()==Qt::Key_Down)
     {
-        size-=global_per.Size;
+        size-=change_size->text().toInt()/100.;
         now_area=area*size*size;
     }
     else
     if (event->key()==Qt::Key_Up)
     {
-        size+=global_per.Size;
+        size+=change_size->text().toInt()/100.;
         now_area=area*size*size;
     }
     else

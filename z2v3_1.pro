@@ -24,7 +24,6 @@ SOURCES += \
 
 HEADERS += \
     ellipse.h \
-    globalvar.h \
     mainwindow.h \
     polygon.h \
     rectangle.h

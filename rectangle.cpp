@@ -72,7 +72,7 @@ void rectangle::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void rectangle::keyPressEvent(QKeyEvent *event)
 {
 
-
+/*
     if (event->key()==Qt::Key_Left) ang += global_per.angle;
     else
     if (event->key()==Qt::Key_Right) ang -= global_per.angle;
@@ -85,6 +85,6 @@ void rectangle::keyPressEvent(QKeyEvent *event)
     ang = 0;
     size = 1;
     }
-
+*/
 }
 
