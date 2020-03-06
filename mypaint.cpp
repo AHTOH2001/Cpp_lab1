@@ -30,6 +30,7 @@ void mypaint::mouseMoveEvent(QMouseEvent *event)
 
 void mypaint::mousePressEvent(QMouseEvent *event)
 {
+    prev_k = cords.length();
     cords.push_back({event->pos().rx(),event->pos().ry()});
     if (cords.length()>1)
     scene -> addLine(cords[cords.length()-2].first,cords[cords.length()-2].second,event->pos().rx(),event->pos().ry(),
@@ -39,6 +40,7 @@ void mypaint::mousePressEvent(QMouseEvent *event)
 
 void mypaint::draw()
 {
+    if (cords.length()<=2) return;
     polygon *item = new polygon();
     item->setFlag(QGraphicsItem::ItemIsFocusable, true);
     item->cords = cords;
@@ -62,6 +64,22 @@ void mypaint::draw()
     scene ->clear();
     scene->update();
     cords.clear();
+    prev_k = 0;
+}
+void mypaint::undo()
+{
+    while (cords.length()>prev_k) {
+        if (cords.length()>1)
+        scene -> addLine(cords[cords.length()-2].first,cords[cords.length()-2].second,cords[cords.length()-1].first,cords[cords.length()-1].second,
+                QPen(Qt::white,PenSize->text().toInt()));
+        cords.pop_back();
+        }
+}
+void mypaint::reset()
+{
+    scene->clear();
+    cords.clear();
+    prev_k = 0;
 }
 /*
 void mypaint::mouseReleaseEvent(QMouseEvent *event)

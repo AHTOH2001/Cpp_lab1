@@ -10,7 +10,7 @@ polygon::~polygon()
 }
 void polygon::init()
 {
-        int prX,prY,nxX,nxY,area = 0;
+        int prX,prY,nxX,nxY;
         for(int i = 0; i < cords.length(); i++)
         {
             prX = cords[i].first;
@@ -62,6 +62,7 @@ void polygon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     painter->drawPoint(0,0);
     painter->setPen(QPen(QColor(R,G,B),PenSize));
     painter->drawPolygon(poly);
+    qDebug()<< 5;
         QThread::msleep(10);
         double delta = ang-now_ang;
         if (delta<0.5 && delta>-0.5) now_ang=ang;

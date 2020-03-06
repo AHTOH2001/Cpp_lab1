@@ -31,7 +31,7 @@ public:
 
     QVector<QPair<int,int>> cords;
     QPair<int,int> Center = {0,0};
-    double area;
+    double area = 0;
     QLabel *out_area,*out_perimeter,*out_angle,*out_centerX,*out_centerY;
     QPushButton *Tgravity;
     QLineEdit *centergravity_x,*centergravity_y,*rotate_angle,*change_size;

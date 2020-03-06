@@ -14,6 +14,8 @@ public:
      explicit mypaint(QWidget *parent = 0);
     ~mypaint();
     void draw();
+    void undo();
+    void reset();
     QLineEdit *R,*G,*B,*PenSize;
     QLabel *out_area,*out_perimeter,*out_angle,*out_centerX,*out_centerY;
     QPushButton *Tgravity;
@@ -28,6 +30,7 @@ signals:
 private:
     QGraphicsScene      *scene;
     QVector<QPair<int,int>> cords;
+    int prev_k= 0;
 
 
 public slots:
